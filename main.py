@@ -56,7 +56,11 @@ async def on_message(message):
     designation_id = config.get('designation_id')
     if not message.guild and designation_id:
         channel = bot.get_channel(designation_id)
-        await channel.send(f'{message.content}')
+        await channel.send(
+            f'```'
+            f'{message.content}'
+            f'```'
+        )
 
 
 bot.run(config.get('token'))
