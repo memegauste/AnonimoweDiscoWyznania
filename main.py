@@ -6,7 +6,6 @@ from utils import read_json_file
 from utils import get_commit_version
 
 
-
 class CustomHelpCommand(DefaultHelpCommand):
 
     def __init__(self, **options):
