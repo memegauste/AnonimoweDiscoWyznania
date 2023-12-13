@@ -22,6 +22,7 @@ Write your own config.json file:
   "designation_id": "DESIGNATION CHANNEL ID FROM YOUR SERVER"
 }
 ```
+You can also set "cmd_prefix" field for changing prefix for additional commands (by default '!').
 
 ## Polski
 
@@ -44,3 +45,5 @@ Stwórz plik config.json i zamieść następujący słownik:
   "designation_id": "KANAŁ WYZNAN Z TWOJEGO SERWERA"
 }
 ```
+
+Możesz także ustawić pole "cmd_prefix" dla zmiany prefixa dodatkowych komend (domyślnie '!').

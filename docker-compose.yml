@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  smoczyca:
-    container_name: smoczyca
+  anonimowediscowyznania:
+    container_name: anonimowediscowyznania
     build:
       context: ./
       dockerfile: Dockerfile
