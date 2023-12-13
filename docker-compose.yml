@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  smoczyca:
+    container_name: smoczyca
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: python main.py
+    restart: unless-stopped
+    volumes:
+      - .:/code
