@@ -22,6 +22,9 @@ Write your own config.json file:
   "designation_id": "DESIGNATION CHANNEL ID FROM YOUR SERVER"
 }
 ```
+
+Configuration of field "designation_id" is NOT required (it's for serving message from private messages).
+
 You can also set "cmd_prefix" field for changing prefix for additional commands (by default '!').
 
 ## Polski
@@ -45,5 +48,7 @@ Stwórz plik config.json i zamieść następujący słownik:
   "designation_id": "KANAŁ WYZNAN Z TWOJEGO SERWERA"
 }
 ```
+
+Konfiguracja pola "designation_id" nie jest wymagana (służy tylko do obsługi prywatnych wiadomości).
 
 Możesz także ustawić pole "cmd_prefix" dla zmiany prefixa dodatkowych komend (domyślnie '!').
