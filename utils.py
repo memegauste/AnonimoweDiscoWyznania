@@ -18,7 +18,6 @@ def init_file_existence(path):
             json.dump({}, f, ensure_ascii=False, indent=4)
 
 
-
 def get_commit_version():
     """Return SHORT commit number."""
     return subprocess.check_output(
