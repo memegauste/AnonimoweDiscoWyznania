@@ -57,7 +57,7 @@ async def on_message(message):
     if not message.guild and designation_id:
         channel = bot.get_channel(designation_id)
         await channel.send(
-            f'```'
+            f'```'  # noqa: W604
             f'{message.content}'
             f'```'
         )
