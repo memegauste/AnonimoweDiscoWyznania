@@ -50,15 +50,31 @@ async def commit_version(ctx):
     await ctx.send(f'{get_commit_version()}')
 
 
+@bot.command(brief='Wyślij anonimową wiadomość')
+async def anonim(ctx):
+    if not ctx.message.guild:
+        return
+    content = f'{ctx.message.content}'.removeprefix('!anonim ')
+    await ctx.message.delete()
+    await ctx.send(
+        f'```'  # noqa: W604
+        f'{content}'
+        f'```'
+    )
+
+
 @bot.event
 async def on_message(message):
     await bot.process_commands(message)
     designation_id = config.get('designation_id')
+    if not message.content.startswith('!anonim'):
+        return
     if not message.guild and designation_id:
         channel = bot.get_channel(designation_id)
+        response = f'{message.content}'.removeprefix('!anonim ')
         await channel.send(
             f'```'  # noqa: W604
-            f'{message.content}'
+            f'{response}'
             f'```'
         )
 
