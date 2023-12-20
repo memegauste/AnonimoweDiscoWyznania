@@ -33,6 +33,7 @@ tree = app_commands.CommandTree(client)
 async def on_ready():
     """Print that bot logged in as."""
     print(f'Logged in as {client.user.name} | ID: {client.user.id}!')
+    await tree.sync()
 
 
 class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
