@@ -46,7 +46,7 @@ class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
 
 
 @tree.command(description='Wyślij anonimową wiadomość')
-async def anonim(interaction, msg: str):
+async def anonim(interaction):
     await interaction.response.send_modal(AnonymousModal())
 
 
