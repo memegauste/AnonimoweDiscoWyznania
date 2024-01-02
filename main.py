@@ -1,10 +1,20 @@
 """Anonimowe disco wyznania"""
+# Standard Library
+import os
+
+# Django
+import django
+
+# 3rd-party
 import discord
 from discord import app_commands
-from discord.ext import commands
 from discord.ext.commands import DefaultHelpCommand
 
-from utils import get_commit_version, read_json_file
+from backend.main.models import Designate
+from utils import read_json_file
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+django.setup()
 
 
 class CustomHelpCommand(DefaultHelpCommand):
@@ -42,10 +52,16 @@ class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
     )
 
     async def on_submit(self, interaction):
-        await getattr(
-            interaction.response,
-            'send_message',
-        )(f'Thank you!', ephemeral=True)
+        custom_kwargs = {'msg_id': interaction.id}
+        obj = Designate.objects.filter(
+            **custom_kwargs,
+        ).first()
+        if not obj:
+            Designate.objects.create(**custom_kwargs)
+            await getattr(
+                interaction.response,
+                'send_message',
+            )(f'Thank you!', ephemeral=True)
 
 
 @tree.command(description='Wyślij anonimową wiadomość')
