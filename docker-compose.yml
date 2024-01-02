@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  web:
+    build: .
+    #    command: python manage.py runserver 0.0.0.0:8064
+    command: gunicorn project.wsgi:application --timeout 300 --bind 0.0.0.0:8000 --reload --access-logfile '-' --error-logfile '-'
+    volumes:
+      - .:/code
+      - apps_static_volume:/code/apps_static
+      - media_volume:/code/public/uploads
+    expose:
+      - 8000
+
   anonimowediscowyznania:
     container_name: anonimowediscowyznania
     build:

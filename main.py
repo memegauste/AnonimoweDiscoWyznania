@@ -42,7 +42,10 @@ class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
     )
 
     async def on_submit(self, interaction):
-        await interaction.response.send_message(f'Thank you!', ephemeral=True)
+        await getattr(
+            interaction.response,
+            'send_message',
+        )(f'Thank you!', ephemeral=True)
 
 
 @tree.command(description='Wyślij anonimową wiadomość')
