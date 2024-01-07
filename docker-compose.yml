@@ -3,14 +3,16 @@ version: "3"
 services:
   web:
     build: .
-    #    command: python manage.py runserver 0.0.0.0:8064
-    command: gunicorn project.wsgi:application --timeout 300 --bind 0.0.0.0:8000 --reload --access-logfile '-' --error-logfile '-'
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
       - apps_static_volume:/code/apps_static
-      - media_volume:/code/public/uploads
     expose:
       - 8000
+    environment:
+      - DJANGO_ALLOW_ASYNC_UNSAFE="true"
+    ports:
+      - "8000:8000"
 
   anonimowediscowyznania:
     container_name: anonimowediscowyznania
@@ -18,6 +20,18 @@ services:
       context: ./
       dockerfile: Dockerfile
     command: python main.py
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.project.settings
+      - DJANGO_ALLOW_ASYNC_UNSAFE="true"
     restart: unless-stopped
+    expose:
+      - 2137
+    ports:
+      - "2137:2137"
+    depends_on:
+      - web
     volumes:
       - .:/code
+
+volumes:
+  apps_static_volume:

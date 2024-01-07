@@ -6,11 +6,12 @@ from django.utils.translation import gettext_lazy as _
 class Designate(models.Model):
     """Designate model (based on discord data)."""
 
-    msg_id = models.CharField(_('Message ID'), max_length=255)
+    message = models.CharField(_('Message'), max_length=255)
     approved = models.BooleanField(_('Is approved?'), default=False)
+    objects = models.Manager()
 
     def __str__(self):  # noqa: D102
-        return f'Designate [{self.msg_id}]'
+        return f'Designate [{self.id}]'
 
     class Meta:  # noqa: D106
         verbose_name = _('Designation')
