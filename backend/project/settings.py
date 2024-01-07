@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+# Standard Library
 import os
 from pathlib import Path
+
+# Django
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-quh#gyi^$7&eo67fjr0znoxch$r=x_5$(+0gic#qf^!j+ok(%q'
+DISCORD_MSG_TOKEN = '9168204b-2f9b-4c6b-80eb-ff131d16a4f7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

@@ -1,4 +1,5 @@
 """Admin file."""
+from django.conf import settings
 # Django
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
@@ -10,15 +11,17 @@ import requests
 from .models import Designate
 
 
-@admin.action(description=_('Potwierdź zaznaczone wyznania'))
+@admin.action(description=_('Confirm selected designations'))
 def generate_so_report_action(modeladmin, request, queryset):
     id_list = queryset.filter(approved=False).values_list('id', flat=True)
     if id_list:
         requests.post(
-            'http://localhost:2137/handle-msg/',
-            data={'msg_ids': list(id_list)},
+            'http://host.docker.internal:2137/handle-msg/',
+            json={
+                'token': getattr(settings, 'DISCORD_MSG_TOKEN', None),
+                'msg_ids': list(id_list),
+            },
         )
-
 
 
 @admin.register(Designate)
@@ -26,8 +29,9 @@ class DesignateAdmin(admin.ModelAdmin):
     """Designate admin file."""
 
     list_display = [
-        'id',
+        'message',
         'approved',
+        'creation_date'
     ]
     search_fields = [
         'message',
