@@ -59,7 +59,7 @@ class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
         await getattr(
             interaction.response,
             'send_message',
-        )(f'Thank you!', ephemeral=True)
+        )(f'Dziękujemy za wyznanie, zostanie ono rozpatrzone niedługo!', ephemeral=True)
 
 
 @tree.command(description='Wyślij anonimową wiadomość')
