@@ -1,6 +1,5 @@
 """Anonimowe disco wyznania"""
 import asyncio
-from asyncio import get_event_loop
 
 # Django
 import django
@@ -12,6 +11,8 @@ from aiohttp.web import Application
 from discord import app_commands
 from discord.ext.commands import DefaultHelpCommand
 from django.apps import apps
+from django.conf import settings
+
 from utils import read_json_file
 
 django.setup()
@@ -53,12 +54,8 @@ class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
     )
 
     async def on_submit(self, interaction):
-        print('hey')
         designate = apps.get_model('storage', 'Designate')
-        print('owo')
-        print(self.designation)
         designate.objects.create(message=f'{self.designation}')
-        print('beka z czuowieka')
         await getattr(
             interaction.response,
             'send_message',
@@ -74,8 +71,11 @@ async def handle_msg(request):
     designation_id = config.get('designation_id')
     if designation_id:
         channel = client.get_channel(designation_id)
-        msg_ids = request.data['msg_ids']
-        designate = apps.get_model('main', 'Designate')
+        data = await request.json()
+        if data.get('token') != getattr(settings, 'DISCORD_MSG_TOKEN', []):
+            return
+        msg_ids = data.get('msg_ids', [])
+        designate = apps.get_model('storage', 'Designate')
         queryset = designate.objects.filter(
             id__in=msg_ids,
         )

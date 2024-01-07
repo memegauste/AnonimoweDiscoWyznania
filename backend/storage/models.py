@@ -8,6 +8,10 @@ class Designate(models.Model):
 
     message = models.CharField(_('Message'), max_length=255)
     approved = models.BooleanField(_('Is approved?'), default=False)
+    created_dt = models.DateTimeField(
+        _('Creation date'),
+        auto_now_add=True,
+    )
     objects = models.Manager()
 
     def __str__(self):  # noqa: D102
