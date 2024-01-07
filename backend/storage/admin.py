@@ -31,7 +31,7 @@ class DesignateAdmin(admin.ModelAdmin):
     list_display = [
         'message',
         'approved',
-        'creation_date'
+        'created_dt',
     ]
     search_fields = [
         'message',
