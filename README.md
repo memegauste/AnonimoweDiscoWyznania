@@ -51,4 +51,4 @@ Stwórz plik config.json i zamieść następujący słownik:
 
 Konfiguracja pola "designation_id" nie jest wymagana (służy tylko do obsługi prywatnych wiadomości).
 
-Możesz także ustawić pole "cmd_prefix" dla zmiany prefixa dodatkowych komend (domyślnie '!').
+Możesz także ustawić pole "cmd_prefix" dla zmiany prefixa dodatkowych komend (domyślnie '/').
