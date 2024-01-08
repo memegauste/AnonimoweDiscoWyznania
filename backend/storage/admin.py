@@ -12,7 +12,7 @@ from .models import Designate
 
 
 @admin.action(description=_('Confirm selected designations'))
-def generate_so_report_action(modeladmin, request, queryset):
+def confirm_designations(modeladmin, request, queryset):
     id_list = queryset.filter(approved=False).values_list('id', flat=True)
     if id_list:
         requests.post(
@@ -37,5 +37,5 @@ class DesignateAdmin(admin.ModelAdmin):
         'message',
     ]
     actions = [
-        generate_so_report_action,
+        confirm_designations,
     ]
