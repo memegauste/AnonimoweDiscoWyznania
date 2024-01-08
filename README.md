@@ -25,7 +25,7 @@ Write your own config.json file:
 
 Configuration of field "designation_id" is NOT required (it's for serving response from private messages).
 
-You can also set "cmd_prefix" field for changing prefix for additional commands (by default '!').
+You can also set "cmd_prefix" field for changing prefix for additional commands (by default '/').
 
 ## Polski
 
