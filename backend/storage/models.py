@@ -15,7 +15,7 @@ class Designate(models.Model):
     objects = models.Manager()
 
     def __str__(self):  # noqa: D102
-        return f'Designate [{self.id}]'
+        return _('Designate [{0}]').format(self.id)
 
     class Meta:  # noqa: D106
         verbose_name = _('Designation')
