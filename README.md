@@ -11,7 +11,7 @@
 An discord.py bot requested by Slenderman. 
 
 ##### Dependencies (not required when using docker-compose)
-* python3 (tested on 3.12.5)
+* python3 (tested on 3.12.6)
 * discord.py 2.4.0
 
 ##### How to write your own config?
@@ -35,7 +35,7 @@ Otwartoźródłowy bot do platformy discord naśladujący AnonimoweMirkoWyznania
 Prośba o wykonanie została przekazana do mnie od Slendermana.
 
 ##### Zależności (nie wymagane przy użyciu docker-compose)
-* python3 (przetestowane na 3.12.5)
+* python3 (przetestowane na 3.12.6)
 * discord.py 2.4.0
 
 ##### Jak napisać swój własny config?
