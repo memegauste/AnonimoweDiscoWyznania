@@ -1,4 +1,4 @@
-FROM nginx:1.27.0-alpine
+FROM nginx:1.27.1-alpine
 
 # Forward request logs to Docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
