@@ -69,8 +69,10 @@ async def anonim(interaction):
 
 async def handle_msg(request):
     designation_id = config.get('designation_id')
-    if designation_id:
+    if f'{designation_id}'.isdigit() and (designation_id := int(designation_id)):
         channel = client.get_channel(designation_id)
+        if not channel:
+            return web.Response(status=404)
         data = await request.json()
         if data.get('token') != getattr(settings, 'DISCORD_MSG_TOKEN', []):
             return
