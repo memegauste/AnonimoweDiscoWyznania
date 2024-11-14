@@ -72,10 +72,10 @@ async def handle_msg(request):
     if f'{designation_id}'.isdigit() and (designation_id := int(designation_id)):
         channel = client.get_channel(designation_id)
         if not channel:
-            return web.Response(status=404)
+            return web.Response(status=404)  # Channel not found
         data = await request.json()
         if data.get('token') != getattr(settings, 'DISCORD_MSG_TOKEN', []):
-            return
+            return web.Response(status=401)  # Not authorized
         msg_ids = data.get('msg_ids', [])
         designate = apps.get_model('storage', 'Designate')
         queryset = designate.objects.filter(
@@ -84,7 +84,8 @@ async def handle_msg(request):
         for item in queryset:
             await channel.send(item.message)
         queryset.update(approved=True)
-    return web.Response(status=200)
+        return web.Response(status=200)
+    return web.Response(status=412)  # Precondition failed
 
 
 async def start_bot():
