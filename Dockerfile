@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.12.6-bullseye
+FROM python:3.13.0-alpine
 WORKDIR /code
 COPY ./docker-scripts.sh /code/docker-scripts.sh
 RUN chmod +x /code/docker-scripts.sh && /code/docker-scripts.sh
