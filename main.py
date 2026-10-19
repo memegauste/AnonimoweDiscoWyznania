@@ -1,8 +1,11 @@
-"""Anonimowe disco wyznania"""
+"""Anonimowe disco wyznania."""
+# Standard Library
 import asyncio
 
 # Django
 import django
+from django.apps import apps
+from django.conf import settings
 
 # 3rd-party
 import discord
@@ -10,17 +13,18 @@ from aiohttp import web
 from aiohttp.web import Application
 from discord import app_commands
 from discord.ext.commands import DefaultHelpCommand
-from django.apps import apps
-from django.conf import settings
 
+# Project
 from utils import read_json_file
 
 django.setup()
 
 
 class CustomHelpCommand(DefaultHelpCommand):
+    """Customize the default command category label."""
 
     def __init__(self, **options):
+        """Initialize the help command with its default category."""
         super().__init__(**options)
         self.no_category = 'General'
 
@@ -49,25 +53,30 @@ async def on_ready():
 
 
 class AnonymousModal(discord.ui.Modal, title='AnonimoweDiscoWyznania'):
+    """Collect an anonymous designation from a Discord user."""
+
     designation = discord.ui.TextInput(
         label='Wyznanie',
     )
 
     async def on_submit(self, interaction):
+        """Save the designation and acknowledge the submission."""
         designate = apps.get_model('storage', 'Designate')
         designate.objects.create(message=f'{self.designation}')
         await getattr(
             interaction.response,
             'send_message',
-        )(f'Dziękujemy za wyznanie, zostanie ono rozpatrzone niedługo!', ephemeral=True)
+        )('Dziękujemy za wyznanie, zostanie ono rozpatrzone niedługo!', ephemeral=True)
 
 
 @tree.command(description='Wyślij anonimową wiadomość')
 async def anonim(interaction):
+    """Open the anonymous designation form."""
     await interaction.response.send_modal(AnonymousModal())
 
 
 async def handle_msg(request):
+    """Publish the requested designations after checking the shared token."""
     designation_id = config.get('designation_id')
     if f'{designation_id}'.isdigit() and (designation_id := int(designation_id)):
         channel = client.get_channel(designation_id)
@@ -89,10 +98,12 @@ async def handle_msg(request):
 
 
 async def start_bot():
+    """Start the Discord client with the configured token."""
     await client.start(config.get('token'))
 
 
 async def background_tasks(app):
+    """Manage the Discord client alongside the HTTP application."""
     app[discord_py] = asyncio.create_task(start_bot())
     yield
     app[discord_py].cancel()

@@ -1,4 +1,5 @@
 """Models file."""
+# Django
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -14,7 +15,8 @@ class Designate(models.Model):
     )
     objects = models.Manager()
 
-    def __str__(self):  # noqa: D102
+    def __str__(self):
+        """Return the translated designation identifier."""
         return _('Designate [{0}]').format(self.id)
 
     class Meta:  # noqa: D106

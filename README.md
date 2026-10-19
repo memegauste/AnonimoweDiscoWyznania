@@ -11,8 +11,8 @@
 An discord.py bot requested by Slenderman. 
 
 ##### Dependencies (not required when using docker-compose)
-* python3 (tested on 3.13.0)
-* discord.py 2.4.0
+* Python 3.15 (CI checks Python 3.12, 3.13, 3.14 and 3.15)
+* Packages pinned in `requirements.txt` (`pip install -r requirements.txt`)
 
 ##### How to write your own config?
 Write your own config.json file:
@@ -35,8 +35,8 @@ Otwartoźródłowy bot do platformy discord naśladujący AnonimoweMirkoWyznania
 Prośba o wykonanie została przekazana do mnie od Slendermana.
 
 ##### Zależności (nie wymagane przy użyciu docker-compose)
-* python3 (przetestowane na 3.13.0)
-* discord.py 2.4.0
+* Python 3.15 (CI sprawdza Pythona 3.12, 3.13, 3.14 i 3.15)
+* Pakiety przypięte w `requirements.txt` (`pip install -r requirements.txt`)
 
 ##### Jak napisać swój własny config?
 Stwórz plik config.json i zamieść następujący słownik:

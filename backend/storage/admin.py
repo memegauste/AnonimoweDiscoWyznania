@@ -1,6 +1,6 @@
 """Admin file."""
-from django.conf import settings
 # Django
+from django.conf import settings
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
@@ -13,6 +13,7 @@ from .models import Designate
 
 @admin.action(description=_('Confirm selected designations'))
 def confirm_designations(modeladmin, request, queryset):
+    """Send unapproved designations to the Discord bot for publication."""
     id_list = queryset.filter(approved=False).values_list('id', flat=True)
     if id_list:
         requests.post(
